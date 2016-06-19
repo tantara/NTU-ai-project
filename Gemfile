@@ -45,4 +45,7 @@ group :development do
   gem 'spring'
 end
 
+gem 'nokogiri', '~> 1.6.7.1'
 gem 'lda-ruby'
+gem 'thin'
+gem 'rack-cors', :require => 'rack/cors'

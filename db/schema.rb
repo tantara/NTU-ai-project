@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160619051623) do
+ActiveRecord::Schema.define(version: 20160619125207) do
 
   create_table "article_keywords", force: :cascade do |t|
     t.integer  "keyword_id"
@@ -28,13 +28,14 @@ ActiveRecord::Schema.define(version: 20160619051623) do
     t.string   "url"
     t.string   "nid"
     t.datetime "published_at"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "count",        default: 0
     t.string   "section"
     t.string   "reporter"
     t.string   "media"
     t.string   "abstract"
+    t.boolean  "hidden",       default: false
   end
 
   add_index "articles", ["nid"], name: "index_articles_on_nid", unique: true
@@ -47,5 +48,43 @@ ActiveRecord::Schema.define(version: 20160619051623) do
   end
 
   add_index "keywords", ["name"], name: "index_keywords_on_name", unique: true
+
+  create_table "lda_group_articles", force: :cascade do |t|
+    t.integer  "lda_group_id"
+    t.integer  "article_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "lda_group_articles", ["article_id"], name: "index_lda_group_articles_on_article_id"
+  add_index "lda_group_articles", ["lda_group_id"], name: "index_lda_group_articles_on_lda_group_id"
+
+  create_table "lda_groups", force: :cascade do |t|
+    t.string   "gid"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "hidden",     default: false
+  end
+
+  add_index "lda_groups", ["gid"], name: "index_lda_groups_on_gid"
+
+  create_table "lsa_group_articles", force: :cascade do |t|
+    t.integer  "lsa_group_id"
+    t.integer  "article_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "lsa_group_articles", ["article_id"], name: "index_lsa_group_articles_on_article_id"
+  add_index "lsa_group_articles", ["lsa_group_id"], name: "index_lsa_group_articles_on_lsa_group_id"
+
+  create_table "lsa_groups", force: :cascade do |t|
+    t.string   "gid"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "hidden",     default: false
+  end
+
+  add_index "lsa_groups", ["gid"], name: "index_lsa_groups_on_gid"
 
 end

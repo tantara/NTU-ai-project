@@ -1,0 +1,4 @@
+Writing PID to tmp/pids/thin.pid
+/Users/tantara/.rvm/gems/ruby-2.2.1/gems/thin-1.6.4/lib/thin/backends/base.rb:103: warning: epoll is not supported on this platform
+No adapter found for /Users/tantara/Workspace/ai-project-at-NTU/lda
+Exiting!

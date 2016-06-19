@@ -25,14 +25,19 @@ vector_space = VectorSpace(texts)
 #print vector_space.search(["cat"])
 #Show score for relatedness against document 0
 
-#for id in range(len(ids)):
-#  prob = vector_space.related(id)
-#  for i in range(len(ids)):
-#    if prob[i] > 0.5 and prob[i] < 0.8 and id != i:
-#      print(offset + id + 1, offset + i + 1, prob[i])
+group = dict()
+for id in range(len(ids)):
+  prob = vector_space.related(id)
+  for i in range(len(ids)):
+    if prob[i] > 0.2 and prob[i] < 0.9 and id != i:
+      if group.has_key(offset + id + 1) == False:
+        group[offset + id + 1] = []
+      group[offset + id + 1].append(offset + i + 1)
+      print(offset + id + 1, offset + i + 1, prob[i])
+print(group)
 
-id = 139
-prob = vector_space.related(id)
-for i in range(len(ids)):
-  if prob[i] > 0.2 and id != i:
-    print(offset + id + 1, offset + i + 1, prob[i])
+#id = 139
+#prob = vector_space.related(id)
+#for i in range(len(ids)):
+#  if prob[i] > 0.2 and id != i:
+#    print(offset + id + 1, offset + i + 1, prob[i])

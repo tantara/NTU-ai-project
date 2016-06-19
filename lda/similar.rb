@@ -9,3 +9,13 @@ group.each do |k, v|
     end
   end
 end
+
+group.each do |k, v|
+  gid = v.sort.join(",")
+  group = LdaGroup.find_by(:gid => gid) || LdaGroup.create(:gid => gid)
+
+  v.each do |aid|
+    LdaGroupArticle.find_by(:lda_group_id => group.id, :article_id => aid) ||
+      LdaGroupArticle.create(:lda_group_id => group.id, :article_id => aid)
+  end
+end
